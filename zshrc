@@ -12,4 +12,4 @@ fi
 
 # Customize to your needs...
 
-
+source ~/.profile
