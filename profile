@@ -1,7 +1,5 @@
 #!/bin/bash
-echo "Sourcing .profile!"
-PATH=/usr/bin:/bin:/usr/sbin:/sbin
-
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 # Platform-specific setups
 unamestr=$(uname)
 case $unamestr in
@@ -34,14 +32,20 @@ case $unamestr in
     # set vim as pager for manual
     #export MANPAGER='col -bx | vim -c ":set ft=man nonu nolist" -R -'
 
-    if [ -f $_prefix/etc/bash-completion ]; then
-      source $_prefix/etc/bash-completion
-    fi
+    # Shell completion
+    shellstr=$(echo $0 | sed -e 's/-//')
+    case $shellstr in
+    'bash')
+      if [ -f $_prefix/etc/bash-completion ]; then
+        source $_prefix/etc/bash-completion
+      fi
 
-    # Add homebrew bash completion file
-    if [ -f $_prefix/Library/Contributions/brew_bash_completion.sh ]; then
-      source $_prefix/Library/Contributions/brew_bash_completion.sh
-    fi
+      # Add homebrew bash completion file
+      if [ -f $_prefix/Library/Contributions/brew_bash_completion.sh ]; then
+        source $_prefix/Library/Contributions/brew_bash_completion.sh
+      fi
+      ;;
+    esac
 
     ;;
 
@@ -76,15 +80,18 @@ fi
 export PATH=$HOME/bin:$PATH
 
 # enable programmable completion features
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-  . /etc/bash_completion
-fi
+shellstr=$(echo $0 | sed -e 's/-//')
+case $shellstr in
+  'bash')
+    if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+      . /etc/bash_completion
+    fi
 
-# enable programmable completion features
-if [ -f $HOME/.bash_completion ] && ! shopt -oq posix; then
-  . $HOME/.bash_completion
-fi
-
+    if [ -f $HOME/.bash_completion ] && ! shopt -oq posix; then
+      . $HOME/.bash_completion
+    fi
+    ;;
+esac
 
 # makes sure bash knows it's dealing with a color terminal-emulator and sets the colors for ls
 # LSCOLORS is BSD/OSX format, LS_COLORS is linux format
