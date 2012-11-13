@@ -55,6 +55,21 @@ case $unamestr in
       . ~/.keychain/`uname -n`-sh
     fi
 
+    # enable programmable completion features
+    shellstr=$(echo $0 | sed -e 's/-//')
+    case $shellstr in
+      'bash')
+        if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+          . /etc/bash_completion
+        fi
+
+        if [ -f $HOME/.bash_completion ] && ! shopt -oq posix; then
+          . $HOME/.bash_completion
+        fi
+        ;;
+    esac
+
+
     #export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
     #  vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
     #  -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
@@ -79,20 +94,6 @@ fi
 # add path to all my useful script and binary directories
 export PATH=$HOME/bin:$PATH
 
-# enable programmable completion features
-shellstr=$(echo $0 | sed -e 's/-//')
-case $shellstr in
-  'bash')
-    if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-      . /etc/bash_completion
-    fi
-
-    if [ -f $HOME/.bash_completion ] && ! shopt -oq posix; then
-      . $HOME/.bash_completion
-    fi
-    ;;
-esac
-
 # makes sure bash knows it's dealing with a color terminal-emulator and sets the colors for ls
 # LSCOLORS is BSD/OSX format, LS_COLORS is linux format
 export CLICOLOR=1
@@ -104,6 +105,8 @@ export CLICOLOR=1
 
 # Load RVM if available - some aliases can cause this to fail on some systems so we load it before them
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
