@@ -13,3 +13,6 @@ fi
 # Customize to your needs...
 
 source ~/.profile
+source ~/.zshenv
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
