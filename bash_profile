@@ -1,2 +1,2 @@
-source $HOME/.profile
-wemux; exit
+#source $HOME/.profile
+# wemux; exit
