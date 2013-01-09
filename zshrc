@@ -2,17 +2,15 @@
 # Executes commands at the start of an interactive session.
 #
 # Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Johnneylee Jack Rollins <Johnneylee.Rollins@gmail.com>
 #
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+# Source stuff
 
-# Customize to your needs...
+# Customizations
 
-source ~/.profile
-source ~/.zshenv
+# source ~/.profile
+# source ~/.zshenv
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
