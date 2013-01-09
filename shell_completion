@@ -1,0 +1,37 @@
+# Platform-specific setups
+unamestr=$(uname)
+case $unamestr in
+'Darwin') # OSX
+  shellstr=$(echo $0 | sed -e 's/-//')
+  case $shellstr in
+  'bash')
+    if [ -f $_prefix/etc/bash-completion ]; then
+      source $_prefix/etc/bash-completion
+    fi
+
+    # Add homebrew bash completion file
+    if [ -f $_prefix/Library/Contributions/brew_bash_completion.sh ]; then
+      source $_prefix/Library/Contributions/brew_bash_completion.sh
+    fi
+    ;;
+  esac
+;;
+
+'Linux')
+  echo 'Ooh Linux'
+  # enable programmable completion features
+  shellstr=$(echo $0 | sed -e 's/-//')
+  case $shellstr in
+  'bash')
+    if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+      source /etc/bash_completion
+    fi
+
+    if [ -f $HOME/.bash_completion ] && ! shopt -oq posix; then
+      source $HOME/.bash_completion
+    fi
+    ;;
+  esac
+;;
+  
+esac

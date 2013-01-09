@@ -1,0 +1,28 @@
+  PATH=$PATH:/usr/X11/bin
+  _prefix=`brew --prefix`
+  # Give precedence to user/local/bin because that's where Homebrew installs their stuff
+  export PATH=$_prefix/bin:$PATH
+  export PATH=$_prefix/sbin:$PATH
+
+  # Python stuff
+  if [ -d $_prefix/share/python ]; then
+    export PATH=$_prefix/share/python:$PATH
+  fi
+
+  # Give precedence to homebrew's version of the GNU utils
+  export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+
+  # I can set alias ls=ls_osx if I don't have gnu coreutils installed
+  # alias ls_osx="ls -p -F -G -h"
+  # Colorize ls
+  # export LSCOLORS=hxdxDxGxbxfxFxBxBxHxHx
+
+  # Attempt at fixing OSX tomfoolery
+  export ARCHFLAGS="-arch x86_64"
+
+  # Tell compiler to use multiple cores
+  export MAKEFLAGS="-j `sysctl hw.ncpu | cut -d ' ' -f 2`"
+
+  # set vim as pager for manual
+  #export MANPAGER='col -bx | vim -c ":set ft=man nonu nolist" -R -'
+
