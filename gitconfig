@@ -67,6 +67,7 @@
 
 [pull]
 	default = current
+	rebase = true
 
 [merge]
 	default = current
@@ -100,5 +101,9 @@
 	trustExitCode = true
 
 [user]
-	name = Johnneylee.Rollins@gmail.com
+	name = Johnneylee Jack Rollins
 	email = Johnneylee.Rollins@gmail.com
+# [remote "origin"]
+#	 fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+# [remote "upstream"]
+#  fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
