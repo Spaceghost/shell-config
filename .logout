@@ -1,0 +1,4 @@
+#!/usr/bin/env $SHELL
+# This is only ran on interactive login shells.
+clear
+echo "I think you ought to know, I'm feeling very depressed."
